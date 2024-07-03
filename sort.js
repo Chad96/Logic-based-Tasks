@@ -4,11 +4,11 @@ const numbers = [
   34, 34, 50, 59, 89, 87, 230, 210, 100, 23, 980,
 ];
 
-// Sort the numbers from lowest to highest
+// Sorting the numbers from lowest to highest
 const sortedAsc = numbers.slice().sort((a, b) => a - b);
 console.log("Sorted Ascending:", sortedAsc);
 
-// Sort the numbers from highest to lowest
+// Sorting the numbers from highest to lowest
 const sortedDesc = numbers.slice().sort((a, b) => b - a);
 console.log("Sorted Descending:", sortedDesc);
 
