@@ -5,19 +5,19 @@ const numbers = [
 ];
 
 // Sort the numbers from lowest to highest
-const sortedAsc = [...numbers].sort((a, b) => a - b);
+const sortedAsc = numbers.slice().sort((a, b) => a - b);
 console.log("Sorted Ascending:", sortedAsc);
 
 // Sort the numbers from highest to lowest
-const sortedDesc = [...numbers].sort((a, b) => b - a);
+const sortedDesc = numbers.slice().sort((a, b) => b - a);
 console.log("Sorted Descending:", sortedDesc);
 
 // Return an array of unique numbers
-const uniqueNumbers = [...new Set(numbers)];
+const uniqueNumbers = Array.from(new Set(numbers));
 console.log("Unique Numbers:", uniqueNumbers);
 
 // Calculate the sum of the numbers in the array
-const sum = numbers.reduce((acc, num) => acc + num, 0);
+const sum = numbers.reduce((total, num) => total + num, 0);
 console.log("Sum of Numbers:", sum);
 
 // Return a new array with elements that are less than or equal to 100
@@ -47,7 +47,7 @@ const countElements = numbers.length;
 console.log("Count of Elements:", countElements);
 
 // Declare a new array that contains the same elements as the original array, but reversed
-const reversedArray = [...numbers].reverse();
+const reversedArray = numbers.slice().reverse();
 console.log("Reversed Array:", reversedArray);
 
 // Given array for the second set of tasks
@@ -99,7 +99,12 @@ console.log("Sum of Numbers in Mixed Array:", sumOfMixedArray);
 
 // Using any looping structure of your choice and a variable, combine all the strings to form a proper greeting
 let greeting = "Hello ";
-let stringElements = mixedArray.filter((item) => typeof item === "string");
+const stringElements = [];
+for (let k = 0; k < mixedArray.length; k++) {
+  if (typeof mixedArray[k] === "string") {
+    stringElements.push(mixedArray[k]);
+  }
+}
 greeting += stringElements.join(", ") + ".";
 console.log("Greeting:", greeting);
 
