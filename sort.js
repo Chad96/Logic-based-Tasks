@@ -1,4 +1,4 @@
-// Given array for the first set of tasks
+//Array 1
 const numbers = [
   3, 56, 23, 78, 23, 78, 100, 123, 148, 193, 190, -190, 210, 34, 67, 3, 78, 210,
   34, 34, 50, 59, 89, 87, 230, 210, 100, 23, 980,
@@ -50,7 +50,7 @@ console.log("Count of Elements:", countElements);
 const reversedArray = numbers.slice().reverse();
 console.log("Reversed Array:", reversedArray);
 
-// Given array for the second set of tasks
+// Array 2 (removing numbers from the mixed array)
 const mixedArray = [
   7,
   10,
