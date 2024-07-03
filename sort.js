@@ -4,49 +4,50 @@ const numbers = [
   34, 34, 50, 59, 89, 87, 230, 210, 100, 23, 980,
 ];
 
-// Sorting the numbers from lowest to highest
+//a. Sorting the numbers from lowest to highest
 const sortedAsc = numbers.slice().sort((a, b) => a - b);
 console.log("Sorted Ascending:", sortedAsc);
 
-// Sorting the numbers from highest to lowest
+// b.Sorting the numbers from highest to lowest
+// the slice returns only a portion of the array copy.
 const sortedDesc = numbers.slice().sort((a, b) => b - a);
 console.log("Sorted Descending:", sortedDesc);
 
-// Return an array of unique numbers
+// c. Return an array of unique numbers
 const uniqueNumbers = Array.from(new Set(numbers));
 console.log("Unique Numbers:", uniqueNumbers);
 
-// Calculate the sum of the numbers in the array
+// d. Calculate the sum of the numbers in the array
 const sum = numbers.reduce((total, num) => total + num, 0);
 console.log("Sum of Numbers:", sum);
 
-// Return a new array with elements that are less than or equal to 100
+// e. Return a new array with elements that are less than or equal to 100
 const lessThanOrEqual100 = numbers.filter((num) => num <= 100);
 console.log("Numbers <= 100:", lessThanOrEqual100);
 
-// Return a new array with elements that are greater than 50
+// f. Return a new array with elements that are greater than 50
 const greaterThan50 = numbers.filter((num) => num > 50);
 console.log("Numbers > 50:", greaterThan50);
 
-// Return a new array with elements that are divisible by 2
+// g. Return a new array with elements that are divisible by 2
 const divisibleBy2 = numbers.filter((num) => num % 2 === 0);
 console.log("Numbers Divisible by 2:", divisibleBy2);
 
-// Return a new array with elements that are divisible by 3
+// h. Return a new array with elements that are divisible by 3
 const divisibleBy3 = numbers.filter((num) => num % 3 === 0);
 console.log("Numbers Divisible by 3:", divisibleBy3);
 
-// Return a new array with elements that are neither divisible by 2 nor 3
+// i. Return a new array with elements that are neither divisible by 2 nor 3
 const notDivisibleBy2or3 = numbers.filter(
   (num) => num % 2 !== 0 && num % 3 !== 0
 );
 console.log("Numbers Not Divisible by 2 or 3:", notDivisibleBy2or3);
 
-// Declare a variable that counts how many elements are in the original array
+// j. Declare a variable that counts how many elements are in the original array
 const countElements = numbers.length;
 console.log("Count of Elements:", countElements);
 
-// Declare a new array that contains the same elements as the original array, but reversed
+// k. Declare a new array that contains the same elements as the original array, but reversed
 const reversedArray = numbers.slice().reverse();
 console.log("Reversed Array:", reversedArray);
 
@@ -66,7 +67,7 @@ const mixedArray = [
   600,
 ];
 
-// Using a for loop and a variable, return all values that are numbers
+// a. Using a for loop and a variable, return all values that are numbers
 const numbersFromArray = [];
 for (let i = 0; i < mixedArray.length; i++) {
   if (typeof mixedArray[i] === "number") {
@@ -75,7 +76,7 @@ for (let i = 0; i < mixedArray.length; i++) {
 }
 console.log("Numbers from Mixed Array:", numbersFromArray);
 
-// Using a while loop and a variable, return all values that are strings
+// b. Using a while loop and a variable, return all values that are strings
 const stringsFromArray = [];
 let i = 0;
 while (i < mixedArray.length) {
@@ -86,7 +87,7 @@ while (i < mixedArray.length) {
 }
 console.log("Strings from Mixed Array:", stringsFromArray);
 
-// Using a do while loop, return the sum of all values in the array
+// c. Using a do while loop, return the sum of all values in the array
 let sumOfMixedArray = 0;
 let j = 0;
 do {
@@ -97,7 +98,7 @@ do {
 } while (j < mixedArray.length);
 console.log("Sum of Numbers in Mixed Array:", sumOfMixedArray);
 
-// Using any looping structure of your choice and a variable, combine all the strings to form a proper greeting
+// d. Using any looping structure of your choice and a variable, combine all the strings to form a proper greeting
 let greeting = "Hello ";
 const stringElements = [];
 for (let k = 0; k < mixedArray.length; k++) {
@@ -108,6 +109,6 @@ for (let k = 0; k < mixedArray.length; k++) {
 greeting += stringElements.join(", ") + ".";
 console.log("Greeting:", greeting);
 
-// Using any looping structure of your choice and a new variable, remove all values in the array that are strings
+// e. Using any looping structure of your choice and a new variable, remove all values in the array that are strings
 const withoutStrings = mixedArray.filter((item) => typeof item !== "string");
 console.log("Array without Strings:", withoutStrings);
