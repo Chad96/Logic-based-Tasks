@@ -113,7 +113,7 @@ let developerNames = developers.map(function (developer) {
   return developer.name;
 });
 console.log(developerNames);
-
+/*
 // b. Count how many total phones all the developers have
 let totalPhones = developers.reduce(function (acc, developer) {
   return acc + developer.phones.length;
@@ -181,7 +181,74 @@ var noLaptop = developers.filter(function (developer) {
 console.log(noLaptop);
 
 //h. Check how many people do not have a computer setup (desktop)
-var noSetup = developers.filter(function (developer) {
+let noSetup = developers.filter(function (developer) {
   return developer.computerSetups.length === 0;
 }).length;
 console.log(noSetup);
+
+// i.Check which developer has the most total gadgets. In your answer provide the name as well as all the gadgets they have.
+let mostGadgetsDeveloper = developers
+  .map(function (developer) {
+    return {
+      name: developer.name,
+      totalGadgets:
+        developer.laptops.length +
+        developer.phones.length +
+        developer.computerSetups.length,
+      gadgets: {
+        laptops: developer.laptops,
+        phones: developer.phones,
+        computerSetups: developer.computerSetups,
+      },
+    };
+  })
+  .sort(function (a, b) {
+    return b.totalGadgets - a.totalGadgets;
+  })[0];
+
+console.log(mostGadgetsDeveloper);
+
+// j. Check which developer has the most phones. In your answer provide the name and the phones they have
+let mostPhonesDeveloper = developers
+  .map(function (developer) {
+    return {
+      name: developer.name,
+      phones: developer.phones,
+    };
+  })
+  .sort(function (a, b) {
+    return b.phones.length - a.phones.length;
+  })[0];
+
+console.log(mostPhonesDeveloper);
+
+// k. Check which developer has the most computer setups. In your answer provide the name as well as their computer setups.
+let mostSetupsDeveloper = developers
+  .map(function (developer) {
+    return {
+      name: developer.name,
+      computerSetups: developer.computerSetups,
+    };
+  })
+  .sort(function (a, b) {
+    return b.computerSetups.length - a.computerSetups.length;
+  })[0];
+
+console.log(mostSetupsDeveloper);
+
+// l. Check which developer has the most monitors (combining all their computer setups). In your answer provide their name and the monitor count.
+let mostMonitorsDeveloper = developers
+  .map(function (developer) {
+    return {
+      name: developer.name,
+      totalMonitors: developer.computerSetups.reduce(function (acc, setup) {
+        return acc + setup.monitors;
+      }, 0),
+    };
+  })
+  .sort(function (a, b) {
+    return b.totalMonitors - a.totalMonitors;
+  })[0];
+
+console.log(mostMonitorsDeveloper);
+*/
