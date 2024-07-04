@@ -153,6 +153,35 @@ let mostTrustedPhoneBrand = phoneBrands
     );
   })
   .pop();
-console.log(mostTrustedPhoneBrand);
+console.log("The most trusted phone brand" + " " + mostTrustedPhoneBrand);
 
 // e.
+let leastTrustedPhoneBrand = phoneBrands.sort(function (a, b) {
+  return (
+    phoneBrands.filter(function (brand) {
+      return brand === a;
+    }).length -
+    phoneBrands.filter(function (brand) {
+      return brand === b;
+    }).length
+  );
+})[0];
+console.log("The least trusted phone brand is " + " " + leastTrustedPhoneBrand);
+
+// f.Check how many people do not have a phone
+let noPhone = developers.filter(function (developer) {
+  return developer.phones.length === 0;
+}).length;
+console.log(noPhone + " " + "people do not have a phone.");
+
+// g. Check how many people do not have a laptop
+var noLaptop = developers.filter(function (developer) {
+  return developer.laptops.length === 0;
+}).length;
+console.log(noLaptop);
+
+//h. Check how many people do not have a computer setup (desktop)
+var noSetup = developers.filter(function (developer) {
+  return developer.computerSetups.length === 0;
+}).length;
+console.log(noSetup);
