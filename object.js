@@ -109,5 +109,29 @@ const developers = [
 //Tasks
 
 // a. Create an array with just the names of all the developers
-const developerNames = developers.map((developer) => developer.name);
+let developerNames = developers.map(function (developer) {
+  return developer.name;
+});
 console.log(developerNames);
+
+// b. Count how many total phones all the developers have
+let totalPhones = developers.reduce(function (acc, developer) {
+  return acc + developer.phones.length;
+}, 0);
+console.log(totalPhones);
+
+// c. Count the number of incomplete setups i.e. setups that have 0 mice
+let incompleteSetups = developers.reduce(function (acc, developer) {
+  return (
+    acc +
+    developer.computerSetups.filter(function (setup) {
+      return (
+        setup.mice === 0 ||
+        setup.keyboards === 0 ||
+        setup.speakers === 0 ||
+        setup.monitors === 0
+      );
+    }).length
+  );
+}, 0);
+console.log(incompleteSetups);
