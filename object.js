@@ -113,7 +113,7 @@ let developerNames = developers.map(function (developer) {
   return developer.name;
 });
 console.log(developerNames);
-/*
+
 // b. Count how many total phones all the developers have
 let totalPhones = developers.reduce(function (acc, developer) {
   return acc + developer.phones.length;
@@ -121,19 +121,24 @@ let totalPhones = developers.reduce(function (acc, developer) {
 console.log(totalPhones);
 
 // c. Count the number of incomplete setups i.e. setups that have 0 mice
-let incompleteSetups = developers.reduce(function (acc, developer) {
+let incompleteSetups = developers.reduce((acc, developer) => {
   return (
     acc +
-    developer.computerSetups.filter(function (setup) {
-      return (
+    developer.computerSetups.reduce((count, setup) => {
+      if (
         setup.mice === 0 ||
         setup.keyboards === 0 ||
         setup.speakers === 0 ||
         setup.monitors === 0
-      );
-    }).length
+      ) {
+        return count + 1;
+      } else {
+        return count;
+      }
+    }, 0)
   );
 }, 0);
+
 console.log(incompleteSetups);
 
 // d. Check what is the most trusted phone brand
@@ -251,4 +256,3 @@ let mostMonitorsDeveloper = developers
   })[0];
 
 console.log(mostMonitorsDeveloper);
-*/
