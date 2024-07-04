@@ -14,6 +14,7 @@ const sortedDesc = numbers.slice().sort((a, b) => b - a);
 console.log("Sorted Descending:", sortedDesc);
 
 // c. Return an array of unique numbers
+//set  is a built-in object that automatically removes duplicates.
 const uniqueNumbers = Array.from(new Set(numbers));
 console.log("Unique Numbers:", uniqueNumbers);
 
