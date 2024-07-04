@@ -135,3 +135,24 @@ let incompleteSetups = developers.reduce(function (acc, developer) {
   );
 }, 0);
 console.log(incompleteSetups);
+
+// d. Check what is the most trusted phone brand
+let phoneBrands = developers.flatMap(function (developer) {
+  return developer.phones;
+});
+
+let mostTrustedPhoneBrand = phoneBrands
+  .sort(function (a, b) {
+    return (
+      phoneBrands.filter(function (brand) {
+        return brand === a;
+      }).length -
+      phoneBrands.filter(function (brand) {
+        return brand === b;
+      }).length
+    );
+  })
+  .pop();
+console.log(mostTrustedPhoneBrand);
+
+// e.
