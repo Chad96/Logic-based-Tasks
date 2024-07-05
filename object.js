@@ -105,166 +105,187 @@ const developers = [
     ],
   },
 ];
-
 // 1. Create an array with just the names of all the developers
-let developerNames = []; //initializes an empty array to store the names.
-for (let i = 0; i < developers.length; i++) {
-  developerNames.push(developers[i].name);
+let developerNames = [];
+function getAllDeveloperNames() {
+  for (let i = 0; i < developers.length; i++) {
+    developerNames.push(developers[i].name);
+  }
 }
+getAllDeveloperNames();
 console.log("Developer Names:", developerNames);
 
 // 2. Count how many total phones all the developers have
 let totalPhones = 0;
-for (let i = 0; i < developers.length; i++) {
-  totalPhones += developers[i].phones.length;
+function getTotalPhones() {
+  for (let i = 0; i < developers.length; i++) {
+    totalPhones += developers[i].phones.length;
+  }
 }
+getTotalPhones();
 console.log("Total Phones:", totalPhones);
 
 // 3. Count the number of incomplete setups
 let incompleteSetups = 0;
-for (let i = 0; i < developers.length; i++) {
-  for (let j = 0; j < developers[i].computerSetups.length; j++) {
-    let setup = developers[i].computerSetups[j];
-    if (
-      setup.monitors === 0 ||
-      setup.keyboards === 0 ||
-      setup.mice === 0 ||
-      setup.speakers === 0
-    ) {
-      incompleteSetups++;
+function countIncompleteSetups() {
+  for (let i = 0; i < developers.length; i++) {
+    for (let j = 0; j < developers[i].computerSetups.length; j++) {
+      let setup = developers[i].computerSetups[j];
+      if (
+        setup.monitors === 0 ||
+        setup.keyboards === 0 ||
+        setup.mice === 0 ||
+        setup.speakers === 0
+      ) {
+        incompleteSetups++;
+      }
     }
   }
 }
+countIncompleteSetups();
 console.log("Incomplete Setups:", incompleteSetups);
 
 // 4. Check what is the most trusted phone brand
 let phoneBrandCount = {};
-for (let i = 0; i < developers.length; i++) {
-  for (let j = 0; j < developers[i].phones.length; j++) {
-    let brand = developers[i].phones[j];
-    if (!phoneBrandCount[brand]) {
-      phoneBrandCount[brand] = 0;
+function findMostTrustedBrand() {
+  for (let i = 0; i < developers.length; i++) {
+    for (let j = 0; j < developers[i].phones.length; j++) {
+      let brand = developers[i].phones[j];
+      if (!phoneBrandCount[brand]) {
+        phoneBrandCount[brand] = 0;
+      }
+      phoneBrandCount[brand]++;
     }
-    phoneBrandCount[brand]++;
   }
-}
 
-let mostTrustedBrand = null;
-let mostTrustedCount = 0;
-for (let brand in phoneBrandCount) {
-  if (phoneBrandCount[brand] > mostTrustedCount) {
-    mostTrustedBrand = brand;
-    mostTrustedCount = phoneBrandCount[brand];
+  let mostTrustedBrand = null;
+  let mostTrustedCount = 0;
+  for (let brand in phoneBrandCount) {
+    if (phoneBrandCount[brand] > mostTrustedCount) {
+      mostTrustedBrand = brand;
+      mostTrustedCount = phoneBrandCount[brand];
+    }
   }
+  return mostTrustedBrand;
 }
+let mostTrustedBrand = findMostTrustedBrand();
 console.log("Most Trusted Phone Brand:", mostTrustedBrand);
 
 // 5. Check what phone brand is least trusted
-let leastTrustedBrand = null;
-let leastTrustedCount = Infinity;
-for (let brand in phoneBrandCount) {
-  if (phoneBrandCount[brand] < leastTrustedCount) {
-    leastTrustedBrand = brand;
-    leastTrustedCount = phoneBrandCount[brand];
+function findLeastTrustedBrand() {
+  let leastTrustedBrand = null;
+  let leastTrustedCount = Infinity;
+  for (let brand in phoneBrandCount) {
+    if (phoneBrandCount[brand] < leastTrustedCount) {
+      leastTrustedBrand = brand;
+      leastTrustedCount = phoneBrandCount[brand];
+    }
   }
+  return leastTrustedBrand;
 }
+let leastTrustedBrand = findLeastTrustedBrand();
 console.log("Least Trusted Phone Brand:", leastTrustedBrand);
 
 // 6. Check how many people do not have a phone
 let noPhoneCount = 0;
-for (let i = 0; i < developers.length; i++) {
-  if (developers[i].phones.length === 0) {
-    noPhoneCount++;
+function countPeopleWithoutPhones() {
+  for (let i = 0; i < developers.length; i++) {
+    if (developers[i].phones.length === 0) {
+      noPhoneCount++;
+    }
   }
 }
+countPeopleWithoutPhones();
 console.log("People Without Phones:", noPhoneCount);
 
 // 7. Check how many people do not have a laptop
 let noLaptopCount = 0;
-for (let i = 0; i < developers.length; i++) {
-  if (developers[i].laptops.length === 0) {
-    noLaptopCount++;
+function countPeopleWithoutLaptops() {
+  for (let i = 0; i < developers.length; i++) {
+    if (developers[i].laptops.length === 0) {
+      noLaptopCount++;
+    }
   }
 }
+countPeopleWithoutLaptops();
 console.log("People Without Laptops:", noLaptopCount);
 
 // 8. Check how many people do not have a computer setup (desktop)
 let noSetupCount = 0;
-for (let i = 0; i < developers.length; i++) {
-  if (developers[i].computerSetups.length === 0) {
-    noSetupCount++;
+function countPeopleWithoutSetups() {
+  for (let i = 0; i < developers.length; i++) {
+    if (developers[i].computerSetups.length === 0) {
+      noSetupCount++;
+    }
   }
 }
+countPeopleWithoutSetups();
 console.log("People Without Computer Setups:", noSetupCount);
 
 // 9. Check which developer has the most total gadgets
-let maxGadgets = 0;
 let mostGadgetsDeveloper = null;
-let mostGadgets = null;
-for (let i = 0; i < developers.length; i++) {
-  let totalGadgets =
-    developers[i].laptops.length +
-    developers[i].phones.length +
-    developers[i].computerSetups.length;
-  if (totalGadgets > maxGadgets) {
-    maxGadgets = totalGadgets;
-    mostGadgetsDeveloper = developers[i].name;
-    mostGadgets = {
-      laptops: developers[i].laptops,
-      phones: developers[i].phones,
-      computerSetups: developers[i].computerSetups,
-    };
+function findDeveloperWithMostGadgets() {
+  let maxGadgets = 0;
+  for (let i = 0; i < developers.length; i++) {
+    let totalGadgets =
+      developers[i].laptops.length +
+      developers[i].phones.length +
+      developers[i].computerSetups.length;
+    if (totalGadgets > maxGadgets) {
+      maxGadgets = totalGadgets;
+      mostGadgetsDeveloper = developers[i].name;
+    }
   }
+  return mostGadgetsDeveloper;
 }
-console.log("Developer with Most Gadgets:", mostGadgetsDeveloper, mostGadgets);
+mostGadgetsDeveloper = findDeveloperWithMostGadgets();
+console.log("Developer with Most Gadgets:", mostGadgetsDeveloper);
 
 // 10. Check which developer has the most phones
-let maxPhones = 0;
 let mostPhonesDeveloper = null;
-let mostPhones = null;
-for (let i = 0; i < developers.length; i++) {
-  if (developers[i].phones.length > maxPhones) {
-    maxPhones = developers[i].phones.length;
-    mostPhonesDeveloper = developers[i].name;
-    mostPhones = developers[i].phones;
+function findDeveloperWithMostPhones() {
+  let maxPhones = 0;
+  for (let i = 0; i < developers.length; i++) {
+    if (developers[i].phones.length > maxPhones) {
+      maxPhones = developers[i].phones.length;
+      mostPhonesDeveloper = developers[i].name;
+    }
   }
+  return mostPhonesDeveloper;
 }
-console.log("Developer with Most Phones:", mostPhonesDeveloper, mostPhones);
+mostPhonesDeveloper = findDeveloperWithMostPhones();
+console.log("Developer with Most Phones:", mostPhonesDeveloper);
 
 // 11. Check which developer has the most computer setups
-let maxSetups = 0;
 let mostSetupsDeveloper = null;
-let mostSetups = null;
-for (let i = 0; i < developers.length; i++) {
-  if (developers[i].computerSetups.length > maxSetups) {
-    maxSetups = developers[i].computerSetups.length;
-    mostSetupsDeveloper = developers[i].name;
-    mostSetups = developers[i].computerSetups;
+function findDeveloperWithMostSetups() {
+  let maxSetups = 0;
+  for (let i = 0; i < developers.length; i++) {
+    if (developers[i].computerSetups.length > maxSetups) {
+      maxSetups = developers[i].computerSetups.length;
+      mostSetupsDeveloper = developers[i].name;
+    }
   }
+  return mostSetupsDeveloper;
 }
-console.log(
-  "Developer with Most Computer Setups:",
-  mostSetupsDeveloper,
-  mostSetups
-);
+mostSetupsDeveloper = findDeveloperWithMostSetups();
+console.log("Developer with Most Computer Setups:", mostSetupsDeveloper);
 
 // 12. Check which developer has the most monitors
-let maxMonitors = 0;
 let mostMonitorsDeveloper = null;
-let mostMonitors = 0;
-for (let i = 0; i < developers.length; i++) {
-  let monitorCount = 0;
-  for (let j = 0; j < developers[i].computerSetups.length; j++) {
-    monitorCount += developers[i].computerSetups[j].monitors;
+function findDeveloperWithMostMonitors() {
+  let maxMonitors = 0;
+  for (let i = 0; i < developers.length; i++) {
+    let monitorCount = 0;
+    for (let j = 0; j < developers[i].computerSetups.length; j++) {
+      monitorCount += developers[i].computerSetups[j].monitors;
+    }
+    if (monitorCount > maxMonitors) {
+      maxMonitors = monitorCount;
+      mostMonitorsDeveloper = developers[i].name;
+    }
   }
-  if (monitorCount > maxMonitors) {
-    maxMonitors = monitorCount;
-    mostMonitorsDeveloper = developers[i].name;
-    mostMonitors = monitorCount;
-  }
+  return mostMonitorsDeveloper;
 }
-console.log(
-  "Developer with Most Monitors:",
-  mostMonitorsDeveloper,
-  mostMonitors
-);
+mostMonitorsDeveloper = findDeveloperWithMostMonitors();
+console.log("Developer with Most Monitors:", mostMonitorsDeveloper);
