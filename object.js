@@ -107,7 +107,7 @@ const developers = [
 ];
 
 // 1. Create an array with just the names of all the developers
-let developerNames = [];
+let developerNames = []; //initializes an empty array to store the names.
 for (let i = 0; i < developers.length; i++) {
   developerNames.push(developers[i].name);
 }
