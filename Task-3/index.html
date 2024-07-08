@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lotto Simulator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Lotto Simulator</h1>
+        <button id="toggleAdmin">Switch to Admin</button>
+      </header>
+      <main id="userView">
+        <section id="userSection">
+          <h2>User</h2>
+          <div id="numberSelection">
+            <!-- Number selection buttons will be rendered here -->
+          </div>
+          <div id="boards">
+            <!-- User board selection will be rendered here -->
+          </div>
+          <button id="generateTickets">Generate Tickets</button>
+          <button id="calculateCost">Calculate Cost</button>
+          <div id="totalCost">Total Cost: R0.00</div>
+        </section>
+      </main>
+      <main id="adminView" class="hidden">
+        <section id="adminSection">
+          <h2>Admin</h2>
+          <button id="simulateDraw">Simulate Draw</button>
+          <div id="drawResults"></div>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
