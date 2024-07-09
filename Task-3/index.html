@@ -3,50 +3,272 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lotto Simulator</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>National Lottery South Africa</title>
+    <style>
+      /* Reset and general styling */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      /* Header styling */
+      header {
+        background-color: #1203df;
+        color: #ffffff;
+        padding: 10px 0;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      /* Navigation styling */
+      nav {
+        margin-top: 10px;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+      }
+
+      nav ul li {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        background-color: #003366;
+      }
+
+      /* Hero section styling */
+      .hero {
+        position: relative;
+        height: 500px;
+        overflow: hidden;
+      }
+
+      .hero img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(100%); /* Adjust image brightness */
+      }
+
+      /*.hero-overlay {
+        background-color: rgba(0, 75, 135, 0.7);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }*/
+
+      .hero-content {
+        z-index: 1;
+        position: relative;
+        text-align: center;
+        color: #2f00ff;
+        padding: 20px;
+      }
+
+      .hero-content h2 {
+        font-size: 56px;
+        margin-bottom: 50px;
+        margin-top: 10%;
+      }
+
+      .hero-content p {
+        font-size: 25px;
+        margin-bottom: 20px;
+        color: #a6ff00;
+        font-weight: bold;
+      }
+
+      .cta-button {
+        background-color: #ffcc00;
+        color: #004b87;
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        text-decoration: none; /* Ensure button style on anchor tag */
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        background-color: #ff9900;
+        color: #ffffff;
+      }
+
+      /* Features section styling */
+      .features {
+        background-color: #ffffff;
+        padding: 50px 20px;
+        text-align: center;
+        margin: 40px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-item {
+        margin-bottom: 40px;
+      }
+
+      .feature-item h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .feature-item p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      /* Footer styling */
+      footer {
+        background-color: #17c500;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px 0;
+        position: relative;
+        margin-top: 40px;
+      }
+
+      footer p {
+        margin: 2;
+      }
+
+      footer .footer-links {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+      }
+
+      footer .footer-links a {
+        color: #ffffff;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          height: 400px;
+        }
+        .hero-content h2 {
+          font-size: 28px;
+        }
+        .hero-content p {
+          font-size: 16px;
+        }
+        .cta-button {
+          padding: 12px 24px;
+          font-size: 16px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="app">
-      <header>
-        <h1>Lotto Simulator</h1>
-        <button id="toggleAdmin">Switch to Admin</button>
-      </header>
-      <main id="userView">
-        <section id="userSection">
-          <h2>User</h2>
-          <div id="numberSelection">
-            <!-- Number selection buttons will be rendered here -->
-          </div>
-          <div id="boards">
-            <!-- User board selection will be rendered here -->
-          </div>
-          <button id="generateTickets">Generate Tickets</button>
-          <button id="calculateCost">Calculate Cost</button>
-          <div>
-            <input type="checkbox" id="includeLottoPlus1" />
-            <label for="includeLottoPlus1">Include Lotto Plus 1</label>
-          </div>
-          <div>
-            <input type="checkbox" id="includeLottoPlus2" />
-            <label for="includeLottoPlus2">Include Lotto Plus 2</label>
-          </div>
-          <div id="totalCost">Total Cost: R0.00</div>
-        </section>
-      </main>
-      <main id="adminView" class="hidden">
-        <section id="adminSection">
-          <h2>Admin</h2>
-          <button id="simulateDraw">Simulate Draw</button>
-          <div id="drawResults"></div>
-        </section>
-      </main>
-      <div id="adminAuth" class="hidden">
-        <label for="adminPassword">Enter Admin Password:</label>
-        <input type="password" id="adminPassword" />
-        <button id="submitAdminPassword">Submit</button>
+    <header>
+      <h1>National Lottery South Africa</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#winners">Winners</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <img src="img/3.jpg" alt="Lottery Background Image" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2>Play and Win Big!</h2>
+          <p>Join the excitement and stand a chance to win massive jackpots!</p>
+          <a href="lotto.html" class="cta-button">Get Started</a>
+        </div>
+      </section>
+
+      <section id="games" class="features">
+        <h2>Popular Games</h2>
+        <div class="feature-item">
+          <h3>PowerBall</h3>
+          <p>Play for a chance to win life-changing jackpots with PowerBall.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Lotto</h3>
+          <p>
+            Experience the thrill of Lotto and win big prizes every Wednesday
+            and Saturday.
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>SportStake</h3>
+          <p>
+            Predict the results of 13 predetermined football fixtures and win
+            big.
+          </p>
+        </div>
+      </section>
+
+      <section id="winners" class="features">
+        <h2>Recent Winners</h2>
+        <div class="feature-item">
+          <h3>John Doe</h3>
+          <p>Won R10 million playing PowerBall!</p>
+        </div>
+        <div class="feature-item">
+          <h3>Jane Smith</h3>
+          <p>Took home R5 million in Lotto jackpot!</p>
+        </div>
+      </section>
+
+      <section id="about" class="features">
+        <h2>About Us</h2>
+        <div class="feature-item">
+          <p>
+            National Lottery South Africa is dedicated to providing safe and
+            enjoyable gaming experiences to all players.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 National Lottery South Africa. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Terms of Use</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Responsible Gaming</a>
+        <a href="#">FAQ</a>
       </div>
-    </div>
-    <script src="script.js"></script>
+    </footer>
   </body>
 </html>

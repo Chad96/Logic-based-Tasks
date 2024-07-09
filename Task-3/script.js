@@ -73,6 +73,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function generateUniqueBoard(existingBoards) {
+    let newBoard;
+    do {
+      newBoard = [];
+      while (newBoard.length < 6) {
+        const randomNumber = Math.floor(Math.random() * 52) + 1;
+        if (!newBoard.includes(randomNumber)) {
+          newBoard.push(randomNumber);
+        }
+      }
+      newBoard.sort((a, b) => a - b);
+    } while (existingBoards.some((board) => board.join() === newBoard.join()));
+    return newBoard;
+  }
+
   function generateTickets() {
     if (selectedNumbers.size !== 6) {
       alert("Please select exactly 6 numbers.");
@@ -81,15 +96,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     userBoards = [];
     boardsContainer.innerHTML = "";
-    const numberOfBoards = prompt(
-      "How many boards do you want to enter with? (Max 10 per ticket)"
+    const numberOfBoards = parseInt(
+      prompt("How many boards do you want to enter with? (Max 10 per ticket)"),
+      10
     );
+    const existingBoards = [];
+
     for (let i = 0; i < numberOfBoards; i++) {
-      const board = Array.from(selectedNumbers);
+      const board = generateUniqueBoard(existingBoards);
+      existingBoards.push(board);
       userBoards.push({
         board,
-        lottoPlus1: includeLottoPlus1,
-        lottoPlus2: includeLottoPlus2,
+        lottoPlus1: document.getElementById("includeLottoPlus1").checked,
+        lottoPlus2: document.getElementById("includeLottoPlus2").checked,
       });
       boardsContainer.appendChild(renderBoard(board, i + 1));
     }
@@ -106,8 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
       numberElement.classList.add(getColorClass(number));
       boardElement.appendChild(numberElement);
     });
-    if (includeLottoPlus1) boardElement.innerHTML += "<p>Lotto Plus 1</p>";
-    if (includeLottoPlus2) boardElement.innerHTML += "<p>Lotto Plus 2</p>";
+    if (document.getElementById("includeLottoPlus1").checked)
+      boardElement.innerHTML += "<p>Lotto Plus 1</p>";
+    if (document.getElementById("includeLottoPlus2").checked)
+      boardElement.innerHTML += "<p>Lotto Plus 2</p>";
     return boardElement;
   }
 
@@ -121,8 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculateCost() {
     const numberOfBoards = userBoards.length;
     ticketCost = numberOfBoards * 5; // R5 per board
-    if (includeLottoPlus1) ticketCost += numberOfBoards * 2.5;
-    if (includeLottoPlus2) ticketCost += numberOfBoards * 2.5;
+    if (document.getElementById("includeLottoPlus1").checked)
+      ticketCost += numberOfBoards * 2.5;
+    if (document.getElementById("includeLottoPlus2").checked)
+      ticketCost += numberOfBoards * 2.5;
     totalCostElement.textContent = `Total Cost: R${ticketCost.toFixed(2)}`;
   }
 
