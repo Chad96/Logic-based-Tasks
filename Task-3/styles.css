@@ -44,13 +44,16 @@ main {
   background-color: red;
   color: white;
 }
+
 .yellow {
   background-color: yellow;
 }
+
 .green {
   background-color: green;
   color: white;
 }
+
 .blue {
   background-color: blue;
   color: white;

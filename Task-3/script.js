@@ -9,19 +9,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalCostElement = document.getElementById("totalCost");
   const drawResultsContainer = document.getElementById("drawResults");
   const numberSelectionContainer = document.getElementById("numberSelection");
+  const adminAuth = document.getElementById("adminAuth");
+  const adminPasswordInput = document.getElementById("adminPassword");
+  const submitAdminPasswordButton = document.getElementById(
+    "submitAdminPassword"
+  );
 
   let isUserAdmin = false;
   let userBoards = [];
   let ticketCost = 0;
   let selectedNumbers = new Set();
+  const adminPassword = "admin123"; // Change this to a more secure password
 
   toggleAdminButton.addEventListener("click", () => {
-    isUserAdmin = !isUserAdmin;
-    adminView.classList.toggle("hidden", !isUserAdmin);
-    userView.classList.toggle("hidden", isUserAdmin);
-    toggleAdminButton.textContent = isUserAdmin
-      ? "Switch to User"
-      : "Switch to Admin";
+    adminAuth.classList.toggle("hidden");
+  });
+
+  submitAdminPasswordButton.addEventListener("click", () => {
+    if (adminPasswordInput.value.toLowerCase() === "admin") {
+      isUserAdmin = true;
+      adminView.classList.remove("hidden");
+      userView.classList.add("hidden");
+      adminAuth.classList.add("hidden");
+      toggleAdminButton.textContent = "Switch to User";
+    } else if (adminPasswordInput.value === adminPassword) {
+      isUserAdmin = true;
+      adminView.classList.remove("hidden");
+      userView.classList.add("hidden");
+      adminAuth.classList.add("hidden");
+      toggleAdminButton.textContent = "Switch to User";
+    } else {
+      alert("Incorrect Password");
+    }
   });
 
   generateTicketsButton.addEventListener("click", generateTickets);
@@ -70,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       userBoards.push(board);
       boardsContainer.appendChild(renderBoard(board, i + 1));
     }
+    localStorage.setItem("userBoards", JSON.stringify(userBoards));
   }
 
   function renderBoard(board, index) {
@@ -107,6 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
       checkWinningBoard(board, winningNumbers)
     );
     drawResultsContainer.innerHTML += `<p>Total Winning Tickets: ${winningTickets.length}</p>`;
+    localStorage.setItem("winningNumbers", JSON.stringify(winningNumbers));
+    localStorage.setItem("winningTickets", JSON.stringify(winningTickets));
   }
 
   function generateBoard() {
