@@ -1,139 +1,179 @@
 Pseudocode for Task 3 - Lotto Simulator (Part One)
-// Define constants
-const MAX_BOARDS_PER_TICKET = 10;
-const LOTTO_COST_PER_BOARD = 5;
-const LOTTO_PLUS_COST_PER_BOARD = 2.5;
-const TOTAL_NUMBERS = 52;
-// Initialize variables
-let userType; // 'admin' or 'user'
-let userSelections = [];
-let totalTickets = [];
-let drawResults = [];
-let winningTickets = [];
-// Function to initialize the application
-function initializeApp() {
-// Display user interface  
-// Show option to switch between admin and user
-// Show number selection interface
-}
-// Function to handle user type switch
-function switchUserType(type) {
-userType = type;
-if (type === "admin") {
-displayAdminInterface();
-} else {
-displayUserInterface();
-}
-}
-// Function to display user interface
-function displayUserInterface() {
-// Display number selection interface
-// Allow users to select 6 numbers from 1 to 52
-// Display cost calculation
-// Option to enter Lotto Plus 1 and Lotto Plus 2
-// Input number of boards
-}
-// Function to handle number selection by users
-function selectNumbers(selectedNumbers) {
-userSelections = selectedNumbers;
-calculateCost();
-}
-// Function to calculate cost based on selected options
-function calculateCost() {
-let baseCost = userSelections.length * LOTTO_COST_PER_BOARD;
-let lottoPlus1Cost = userSelections.includes("Lotto Plus 1")
-? userSelections.length * LOTTO_PLUS_COST_PER_BOARD
-: 0;
-let lottoPlus2Cost = userSelections.includes("Lotto Plus 2")
-? userSelections.length * LOTTO_PLUS_COST_PER_BOARD
-: 0;
-let totalCost = baseCost + lottoPlus1Cost + lottoPlus2Cost;
-displayTotalCost(totalCost);
-}
-// Function to handle board generation
-function generateBoards(numberOfBoards) {
-let boards = [];
-for (let i = 0; i < numberOfBoards; i++) {
-let board = promptUserForNumbers();
-boards.push(board);
-}
-assignBoardsToTickets(boards);
-}
-// Function to prompt user for numbers
-function promptUserForNumbers() {
-// Display interface for number selection
-// Return selected numbers
-}
-// Function to assign boards to tickets
-function assignBoardsToTickets(boards) {
-let ticket = [];
-for (let i = 0; i < boards.length; i++) {
-if (ticket.length < MAX_BOARDS_PER_TICKET) {
-ticket.push(boards[i]);
-} else {
-totalTickets.push(ticket);
-ticket = [boards[i]];
-}
-}
-if (ticket.length > 0) {
-totalTickets.push(ticket);
-}
-saveTickets();
-}
-// Function to save tickets to localStorage
-function saveTickets() {
-localStorage.setItem("tickets", JSON.stringify(totalTickets));
-}
-// Function to display admin interface
-function displayAdminInterface() {
-// Display draw simulation option
-// Display data for winning tickets
-}
-// Function to simulate a draw
-function simulateDraw() {
-drawResults = generateRandomNumbers();
-checkWinningTickets();
-saveDrawResults();
-}
-// Function to generate random numbers for draw
-function generateRandomNumbers() {
-// Generate 6 random numbers from 1 to 52
-// Return the generated numbers
-}
-// Function to check winning tickets
-function checkWinningTickets() {
-totalTickets.forEach((ticket) => {
-ticket.forEach((board) => {
-let matches = checkMatches(board, drawResults);
-if (matches >= 3) {
-winningTickets.push({ board, matches });
-}
-});
-});
-alertWinners();
-}
-// Function to check matches between board and draw results
-function checkMatches(board, results) {
-// Compare board numbers with draw results
-// Return number of matches
-}
-// Function to save draw results
-function saveDrawResults() {
-localStorage.setItem("drawResults", JSON.stringify(drawResults));
-localStorage.setItem("winningTickets", JSON.stringify(winningTickets));
-}
-// Function to alert winners
-function alertWinners() {
-// Notify users if they won
-// Notify admin of winning tickets
-}
-// Function to display total cost
-function displayTotalCost(cost) {
-// Update UI to show the total cost
-}
-// Function to handle user notifications
-function handleUserNotifications() {
-// Check if user has winning tickets and notify them
-}
-// Initialize the application
-initializeApp();
+
+Define MAX_BOARDS_PER_TICKET = 10
+Define LOTTO_COST_PER_BOARD = 5
+Define LOTTO_PLUS_COST_PER_BOARD = 2.5
+Define TOTAL_NUMBERS = 52
+
+Define userType as String
+Define userSelections as List
+Define totalTickets as List
+Define drawResults as List
+Define winningTickets as List
+
+
+Create elements for user input:
+User type switch
+Number selection
+Board selection
+End
+Create elements for displaying ticket information:
+Ticket details
+Total cost
+End
+Create elements for displaying draw results:
+Winning numbers
+End
+End
+
+Function initializeApp():
+
+Display user interface
+Show option to switch between admin and user
+Show number selection interface
+End
+Function switchUserType(type):
+
+Set userType to type
+If type is "admin":
+Display admin interface
+Else:
+Display user interface
+End
+End
+
+Function displayUserInterface():
+
+Display number selection interface
+Allow users to select 6 numbers from 1 to 52
+Display cost calculation
+Provide option to enter Lotto Plus 1 and Lotto Plus 2
+Allow input for the number of boards
+End
+Function selectNumbers(selectedNumbers):
+
+Set userSelections to selectedNumbers
+calculateCost()
+End
+
+Function calculateCost():
+baseCost = userSelections.length * LOTTO_COST_PER_BOARD
+If "Lotto Plus 1" is included in userSelections:
+lottoPlus1Cost = userSelections.length * LOTTO_PLUS_COST_PER_BOARD
+Else:
+lottoPlus1Cost = 0
+End
+If "Lotto Plus 2" is included in userSelections:
+lottoPlus2Cost = userSelections.length * LOTTO_PLUS_COST_PER_BOARD
+Else:
+lottoPlus2Cost = 0
+End
+totalCost = baseCost + lottoPlus1Cost + lottoPlus2Cost
+Display total cost
+End
+
+Function generateBoards(numberOfBoards):
+
+boards = []
+For i from 0 to numberOfBoards - 1:
+board = promptUserForNumbers()
+Add board to boards
+End
+assignBoardsToTickets(boards)
+End
+Function promptUserForNumbers():
+
+Display interface for number selection
+Return selected numbers
+End
+
+Function assignBoardsToTickets(boards):
+
+ticket = []
+For each board in boards:
+If ticket.length < MAX_BOARDS_PER_TICKET:
+Add board to ticket
+Else:
+Add ticket to totalTickets
+ticket = [board]
+End
+End
+If ticket.length > 0:
+Add ticket to totalTickets
+End
+saveTickets()
+End
+
+Function saveTickets():
+
+Save totalTickets to localStorage
+End
+Function displayAdminInterface():
+
+Display draw simulation option
+Display data for winning tickets
+End
+
+Function simulateDraw():
+
+drawResults = generateRandomNumbers(6, 1, 52)
+checkWinningTickets()
+saveDrawResults()
+End
+
+Function generateRandomNumbers(count, min, max):
+
+numbers = []
+While numbers.length < count:
+randomNumber = getRandomNumber(min, max)
+If randomNumber not in numbers:
+Add randomNumber to numbers
+End
+End
+Return numbers
+End
+
+Function checkWinningTickets():
+
+For each ticket in totalTickets:
+For each board in ticket:
+matches = checkMatches(board, drawResults)
+If matches >= 3:
+Add {board, matches} to winningTickets
+End
+End
+End
+alertWinners()
+End
+
+Function checkMatches(board, results):
+
+Compare board numbers with drawResults
+Return number of matches
+End
+
+Function saveDrawResults():
+
+Save drawResults and winningTickets to localStorage
+End
+
+Function alertWinners():
+
+Notify users if they have winning tickets
+Notify admin of winning tickets
+End
+
+Function displayTotalCost(cost):
+
+Update UI to show total cost
+End
+
+Function handleUserNotifications():
+
+Check if user has winning tickets and notify them
+End
+
+Function initializeApp():
+
+Call initializeApp()
+End
