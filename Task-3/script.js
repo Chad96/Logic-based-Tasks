@@ -86,7 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     for (let i = 0; i < numberOfBoards; i++) {
       const board = Array.from(selectedNumbers);
-      userBoards.push(board);
+      userBoards.push({
+        board,
+        lottoPlus1: includeLottoPlus1,
+        lottoPlus2: includeLottoPlus2,
+      });
       boardsContainer.appendChild(renderBoard(board, i + 1));
     }
     localStorage.setItem("userBoards", JSON.stringify(userBoards));
@@ -102,6 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
       numberElement.classList.add(getColorClass(number));
       boardElement.appendChild(numberElement);
     });
+    if (includeLottoPlus1) boardElement.innerHTML += "<p>Lotto Plus 1</p>";
+    if (includeLottoPlus2) boardElement.innerHTML += "<p>Lotto Plus 2</p>";
     return boardElement;
   }
 
@@ -115,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculateCost() {
     const numberOfBoards = userBoards.length;
     ticketCost = numberOfBoards * 5; // R5 per board
+    if (includeLottoPlus1) ticketCost += numberOfBoards * 2.5;
+    if (includeLottoPlus2) ticketCost += numberOfBoards * 2.5;
     totalCostElement.textContent = `Total Cost: R${ticketCost.toFixed(2)}`;
   }
 
@@ -124,11 +132,51 @@ document.addEventListener("DOMContentLoaded", () => {
       ", "
     )}</h3>`;
     const winningTickets = userBoards.filter((board) =>
-      checkWinningBoard(board, winningNumbers)
+      checkWinningBoard(board.board, winningNumbers)
     );
+
+    const lottoPlus1WinningNumbers = generateBoard();
+    drawResultsContainer.innerHTML += `<h3>Lotto Plus 1 Winning Numbers: ${lottoPlus1WinningNumbers.join(
+      ", "
+    )}</h3>`;
+    const lottoPlus1WinningTickets = userBoards.filter(
+      (board) =>
+        board.lottoPlus1 &&
+        checkWinningBoard(board.board, lottoPlus1WinningNumbers)
+    );
+
+    const lottoPlus2WinningNumbers = generateBoard();
+    drawResultsContainer.innerHTML += `<h3>Lotto Plus 2 Winning Numbers: ${lottoPlus2WinningNumbers.join(
+      ", "
+    )}</h3>`;
+    const lottoPlus2WinningTickets = userBoards.filter(
+      (board) =>
+        board.lottoPlus2 &&
+        checkWinningBoard(board.board, lottoPlus2WinningNumbers)
+    );
+
     drawResultsContainer.innerHTML += `<p>Total Winning Tickets: ${winningTickets.length}</p>`;
+    drawResultsContainer.innerHTML += `<p>Total Lotto Plus 1 Winning Tickets: ${lottoPlus1WinningTickets.length}</p>`;
+    drawResultsContainer.innerHTML += `<p>Total Lotto Plus 2 Winning Tickets: ${lottoPlus2WinningTickets.length}</p>`;
+
     localStorage.setItem("winningNumbers", JSON.stringify(winningNumbers));
+    localStorage.setItem(
+      "lottoPlus1WinningNumbers",
+      JSON.stringify(lottoPlus1WinningNumbers)
+    );
+    localStorage.setItem(
+      "lottoPlus2WinningNumbers",
+      JSON.stringify(lottoPlus2WinningNumbers)
+    );
     localStorage.setItem("winningTickets", JSON.stringify(winningTickets));
+    localStorage.setItem(
+      "lottoPlus1WinningTickets",
+      JSON.stringify(lottoPlus1WinningTickets)
+    );
+    localStorage.setItem(
+      "lottoPlus2WinningTickets",
+      JSON.stringify(lottoPlus2WinningTickets)
+    );
   }
 
   function generateBoard() {
