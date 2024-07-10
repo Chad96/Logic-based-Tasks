@@ -1,92 +1,188 @@
 body {
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background-color: #f0f0f0;
 }
 
-header {
-  background-color: #4caf50;
-  color: white;
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: right;
+  margin-top: 30%; /* Increased margin top and bottom */
+}
+
+#app {
   text-align: center;
-  padding: 1em 0;
+  margin-top: 30px; /* Increased margin to push content further down */
 }
 
-main {
-  padding: 1em;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.hidden {
-  display: none;
+.input-group label {
+  margin-bottom: 10px; /* Increased margin for better spacing */
 }
 
-#numberSelection {
+#number-balls-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 1em;
+  gap: 15px; /* Increased gap between number balls for better visibility */
+  justify-content: center;
+  margin-top: 30px; /* Increased margin to push content further down */
 }
 
-.number {
+.number-ball {
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   border-radius: 50%;
-  text-align: center;
-  line-height: 40px;
-  border: 1px solid #ccc;
-}
-
-.red {
-  background-color: red;
-  color: white;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.green {
-  background-color: green;
-  color: white;
-}
-
-.blue {
-  background-color: blue;
-  color: white;
-}
-
-.number.selected {
-  border: 2px solid black;
-}
-
-button {
-  display: block;
-  margin: 1em 0;
-  padding: 0.5em 1em;
-  background-color: #4caf50;
-  color: white;
-  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
+  transition: transform 0.2s;
 }
 
-button:hover {
-  background-color: #45a049;
+.number-ball.red {
+  background-color: red;
+}
+.number-ball.yellow {
+  background-color: yellow;
+  color: #000;
+}
+.number-ball.green {
+  background-color: green;
+}
+.number-ball.blue {
+  background-color: blue;
 }
 
-#boards {
+.number-ball:hover {
+  transform: scale(1.1);
+}
+
+.selected {
+  border: 2px solid #000;
+}
+
+.checkbox-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Increased gap between checkboxes */
+  margin: 30px 0; /* Increased margin top and bottom */
+}
+
+#boards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 1em;
+  justify-content: center;
+  gap: 30px; /* Increased gap between boards */
+  margin-top: 40px; /* Increased margin to push content further down */
 }
 
 .board {
+  flex: 0 1 calc(33% - 40px); /* Three boards per row */
+  margin: 20px;
+  padding: 20px;
   border: 1px solid #ccc;
-  padding: 1em;
-  width: 100px;
-  text-align: center;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.board:hover {
+  transform: translateY(-5px);
+}
+
+.board-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.board-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.board-numbers .number-ball {
+  margin-right: 5px;
+  animation: float 2s ease-in-out infinite;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px; /* Increased padding for better touch interaction */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 15px 0; /* Increased margin top and bottom */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#switch-to-admin-button {
+  background-color: #28a745;
+  margin-top: 30%; /* Added margin to ensure visibility */
+}
+
+#switch-to-admin-button:hover {
+  background-color: #218838;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 15px; /* Adjusted padding for smaller screens */
+  }
+
+  .board {
+    flex: 0 1 calc(50% - 20px); /* Two boards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    flex: 1 1 100%; /* One board per row */
+  }
 }

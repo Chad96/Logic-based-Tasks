@@ -7,44 +7,37 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="app">
-      <header>
+    <div class="card">
+      <div class="header">
+        <button id="switch-to-admin-button">Switch to Admin</button>
         <h1>Lotto Simulator</h1>
-        <button id="toggleAdmin">Switch to Admin</button>
-      </header>
-      <main id="userView">
-        <section id="userSection">
+      </div>
+      <div id="app">
+        <div id="user-section">
           <h2>User</h2>
-          <div id="numberSelection">
-            <!-- Number selection buttons will be rendered here -->
+          <div class="input-group">
+            <label for="number-of-boards">Number of Boards:</label>
+            <input type="number" id="number-of-boards" min="1" max="10" />
           </div>
-          <div id="boards">
-            <!-- User board selection will be rendered here -->
+          <div id="number-selection">
+            <h3>Select Your Numbers</h3>
+            <div id="number-balls-container"></div>
           </div>
-          <button id="generateTickets">Generate Tickets</button>
-          <button id="calculateCost">Calculate Cost</button>
-          <div>
-            <input type="checkbox" id="includeLottoPlus1" />
-            <label for="includeLottoPlus1">Include Lotto Plus 1</label>
+          <div class="checkbox-group">
+            <input type="checkbox" id="lotto-plus-1" name="lotto-plus-1" />
+            <label for="lotto-plus-1">Lotto Plus 1</label>
+            <input type="checkbox" id="lotto-plus-2" name="lotto-plus-2" />
+            <label for="lotto-plus-2">Lotto Plus 2</label>
           </div>
-          <div>
-            <input type="checkbox" id="includeLottoPlus2" />
-            <label for="includeLottoPlus2">Include Lotto Plus 2</label>
-          </div>
-          <div id="totalCost">Total Cost: R0.00</div>
-        </section>
-      </main>
-      <main id="adminView" class="hidden">
-        <section id="adminSection">
+          <button id="generate-boards">Generate Boards</button>
+          <div id="boards-container"></div>
+          <div id="total-cost"></div>
+        </div>
+        <div id="admin-section">
           <h2>Admin</h2>
-          <button id="simulateDraw">Simulate Draw</button>
-          <div id="drawResults"></div>
-        </section>
-      </main>
-      <div id="adminAuth" class="hidden">
-        <label for="adminPassword">Enter Admin Password:</label>
-        <input type="password" id="adminPassword" />
-        <button id="submitAdminPassword">Submit</button>
+          <button id="simulate-draw">Simulate Draw</button>
+          <div id="draw-results"></div>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
