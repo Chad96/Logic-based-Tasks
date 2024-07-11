@@ -1,11 +1,13 @@
-body {
+body,
+html {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
   margin: 0;
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 
 .card {
@@ -15,7 +17,6 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 800px;
-  overflow: hidden;
 }
 
 .header {
@@ -27,12 +28,12 @@ body {
 
 h1 {
   text-align: right;
-  margin-top: 30%; /* Increased margin top and bottom */
+  margin-top: 30px; /* Adjusted margin */
 }
 
 #app {
   text-align: center;
-  margin-top: 30px; /* Increased margin to push content further down */
+  margin-top: 30px; /* Adjusted margin */
 }
 
 .input-group {
@@ -44,15 +45,15 @@ h1 {
 }
 
 .input-group label {
-  margin-bottom: 10px; /* Increased margin for better spacing */
+  margin-bottom: 10px; /* Adjusted margin */
 }
 
 #number-balls-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px; /* Increased gap between number balls for better visibility */
+  gap: 15px; /* Adjusted gap */
   justify-content: center;
-  margin-top: 30px; /* Increased margin to push content further down */
+  margin-top: 30px; /* Adjusted margin */
 }
 
 .number-ball {
@@ -94,20 +95,20 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px; /* Increased gap between checkboxes */
-  margin: 30px 0; /* Increased margin top and bottom */
+  gap: 15px; /* Adjusted gap */
+  margin: 30px 0; /* Adjusted margin */
 }
 
 #boards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px; /* Increased gap between boards */
-  margin-top: 40px; /* Increased margin to push content further down */
+  gap: 30px; /* Adjusted gap */
+  margin-top: 40px; /* Adjusted margin */
 }
 
 .board {
-  flex: 0 1 calc(33% - 40px); /* Three boards per row */
+  flex: 0 1 calc(33% - 40px); /* Adjusted width */
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -140,12 +141,12 @@ h1 {
 button {
   background-color: #007bff;
   color: white;
-  padding: 12px 24px; /* Increased padding for better touch interaction */
+  padding: 12px 24px; /* Adjusted padding */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin: 15px 0; /* Increased margin top and bottom */
+  margin: 15px 0; /* Adjusted margin */
 }
 
 button:hover {
@@ -154,7 +155,6 @@ button:hover {
 
 #switch-to-admin-button {
   background-color: #28a745;
-  margin-top: 30%; /* Added margin to ensure visibility */
 }
 
 #switch-to-admin-button:hover {
@@ -173,16 +173,16 @@ button:hover {
 
 @media (max-width: 768px) {
   .card {
-    padding: 15px; /* Adjusted padding for smaller screens */
+    padding: 15px; /* Adjusted padding */
   }
 
   .board {
-    flex: 0 1 calc(50% - 20px); /* Two boards per row */
+    flex: 0 1 calc(50% - 20px); /* Adjusted width */
   }
 }
 
 @media (max-width: 480px) {
   .board {
-    flex: 1 1 100%; /* One board per row */
+    flex: 1 1 100%; /* Adjusted width */
   }
 }

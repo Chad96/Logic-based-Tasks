@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const appSection = document.getElementById("app");
   const userSection = document.getElementById("user-section");
   const adminSection = document.getElementById("admin-section");
+  const switchToAdminButton = document.getElementById("switch-to-admin-button");
 
   const numberOfBoardsInput = document.getElementById("number-of-boards");
   const generateBoardsButton = document.getElementById("generate-boards");
@@ -19,6 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedNumbers = new Set();
   const boards = [];
 
+  switchToAdminButton.addEventListener("click", () => {
+    if (
+      adminSection.style.display === "none" ||
+      adminSection.style.display === ""
+    ) {
+      adminSection.style.display = "block";
+      switchToAdminButton.innerText = "Switch to User";
+    } else {
+      adminSection.style.display = "none";
+      switchToAdminButton.innerText = "Switch to Admin";
+    }
+  });
+
   generateBoardsButton.addEventListener("click", () => {
     const numberOfBoards = parseInt(numberOfBoardsInput.value);
     generateBoards(numberOfBoards);
@@ -28,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   generateNumberBalls();
 
-  // Show the app and admin sections by default
+  // Show the app and user sections by default
   appSection.style.display = "block";
-  adminSection.style.display = "block";
   userSection.style.display = "block";
+  adminSection.style.display = "none"; // Hide admin section by default
 
   function generateNumberBalls() {
     for (let i = 1; i <= 52; i++) {
