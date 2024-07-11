@@ -14,8 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const lottoPlus1Checkbox = document.getElementById("lotto-plus-1");
   const lottoPlus2Checkbox = document.getElementById("lotto-plus-2");
+  const winnersDiv = document.getElementById("winners"); // New element for displaying winners
 
   const selectedNumbers = new Set();
+  const boards = [];
 
   generateBoardsButton.addEventListener("click", () => {
     const numberOfBoards = parseInt(numberOfBoardsInput.value);
@@ -69,30 +71,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     boardsContainer.innerHTML = "";
+    boards.length = 0; // Clear the boards array
     let totalCost = 0;
 
     for (let i = 0; i < numberOfBoards; i++) {
-      const board = document.createElement("div");
-      board.className = "board";
+      const board = {
+        id: `Ticket-${Math.random().toString(36).substr(2, 9)}`,
+        date: new Date().toLocaleDateString(),
+        numbers: Array.from(selectedNumbers),
+      };
+      boards.push(board);
+
+      const boardDiv = document.createElement("div");
+      boardDiv.className = "board";
 
       const header = document.createElement("div");
       header.className = "board-header";
-      const date = new Date().toLocaleDateString();
-      const ticketID = `Ticket-${Math.random().toString(36).substr(2, 9)}`;
-      header.innerText = `Board ${i + 1} (ID: ${ticketID}, Date: ${date})`;
-      board.appendChild(header);
+      header.innerText = `Board ${i + 1} (ID: ${board.id}, Date: ${
+        board.date
+      })`;
+      boardDiv.appendChild(header);
 
-      const numbers = document.createElement("div");
-      numbers.className = "board-numbers";
-      selectedNumbers.forEach((number) => {
+      const numbersDiv = document.createElement("div");
+      numbersDiv.className = "board-numbers";
+      board.numbers.forEach((number) => {
         const ball = document.createElement("div");
         ball.className = `number-ball ${getColorClass(number)}`;
         ball.innerText = number;
-        numbers.appendChild(ball);
+        numbersDiv.appendChild(ball);
       });
-      board.appendChild(numbers);
+      boardDiv.appendChild(numbersDiv);
 
-      boardsContainer.appendChild(board);
+      boardsContainer.appendChild(boardDiv);
       totalCost += 5;
 
       if (lottoPlus1Checkbox.checked) totalCost += 2.5;
@@ -109,5 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     drawResultsDiv.innerHTML = `Winning Numbers: ${winningNumbers.join(", ")}`;
+
+    const winners = boards.filter((board) => {
+      return board.numbers.every((number) => winningNumbers.includes(number));
+    });
+
+    winnersDiv.innerHTML = `Number of winners: ${winners.length}`;
   }
 });
